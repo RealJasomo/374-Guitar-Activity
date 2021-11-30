@@ -1,10 +1,13 @@
 @startuml "Guitar Shop"
 
 class Main{
-    
+    +HandleLogin(username, password)
+    +HandleSearch(guitarspec)
+    +HandleUpdateGuitar(guitar, guitarspec, price)
+    +HandleRemoveGuitar(guitar)
 }
 
-class Guitar{
+abstract class Instrument{
     SerialNumber
     Price
 }
@@ -17,23 +20,44 @@ class GuitarSpecification{
     Model: String
 }
 
+class PianoSpecification{
+    
+}
+class DrumSpecification{
+
+}
+
 interface Repository{
     +Add(Entity)
     +AddRange(EntityList)
     +Remove(Entity)
     +findById(Id)
     +findByKey(KeySelector, Key)
+    +SaveEntity(Entity)
 }
-class GuitarRepository{
+
+class Piano{
 
 }
 
-class GuitarController{
-    +Search(GuitarSpec)
-    +Add(User, Guitar)
-    +AddBulk(User, GuitarSpec, SerialNumbers)
-    +RemoveGuitarById(User, Id)
-    +RemoveGuitar(User, Guitar)
+class Drum{
+
+}
+
+class Guitar{
+
+}
+
+class InstrumentController{
+    +Search(InstrumentSpec)
+    +Add(User, Instrument)
+    +AddBulk(User, InstrumentSpec, SerialNumbers)
+    +RemoveInstrumentById(User, Id)
+    +RemoveInstrument(User, Instrument)
+}
+
+class InstrumentRepository{
+    
 }
 
 enum Builder{
@@ -101,11 +125,6 @@ class Customer{
 }
 
 Guitar --> GuitarSpecification
-GuitarRepository --|> Repository
-GuitarRepository --> Database
-
-GuitarController --> GuitarRepository
-GuitarRepository --> "*" Guitar
 GuitarSpecification --> Builder
 GuitarSpecification --> Wood
 GuitarSpecification --> Type
@@ -118,6 +137,16 @@ UserRepository --> Database
 UserController --> UserRepository
 UserRepository --> "*" User
 Main --> UserController
-Main --> GuitarController
+Main --> "*" InstrumentController
+
+InstrumentRepository --|> Repository
+InstrumentController --> InstrumentRepository
+InstrumentRepository --> "*" Instrument
+Piano --|> Instrument
+Guitar --|> Instrument
+Drum --|> Instrument
+
+Piano --> PianoSpecification
+Drum --> DrumSpecification
 
 @enduml
