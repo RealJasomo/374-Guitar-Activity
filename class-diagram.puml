@@ -5,42 +5,82 @@ class Main{
 }
 
 class Guitar{
-
+    SerialNumber
+    Price
 }
-class GuitarSpecification{
 
+class GuitarSpecification{
+    Builder
+    BackWood
+    TopWood
+    Type
+    Model: String
 }
 
 interface Repository{
-
+    +Add(Entity)
+    +AddRange(EntityList)
+    +Remove(Entity)
+    +findById(Id)
+    +findByKey(KeySelector, Key)
 }
 class GuitarRepository{
 
 }
 
 class GuitarController{
-
+    +Search(GuitarSpec)
+    +Add(User, Guitar)
+    +AddBulk(User, GuitarSpec, SerialNumbers)
+    +RemoveGuitarById(User, Id)
+    +RemoveGuitar(User, Guitar)
 }
 
 enum Builder{
-
+    FENDER
+    MARTIN
+    GIBSON
+    COLLINGS
+    OLSON
+    RYAN
+    PRS
+    ANY
 }
+
 enum Wood{
-
+    ALDER
+    ADIRONDACK
+    BRAZILIAN_ROSEWOOD
+    CEDAR
+    COCOBOLO
+    INDIAN_ROSEWOOD
+    MAHOGANY
+    MAPLE
+    SITKA
 }
-enum Type{
 
+enum Type{
+    ELECTRIC
+    ACOUSTIC
 }
 
 interface Database{
-
+    +SaveChanges()
+    +LoadDatabase()
+    +Set<Type>()
 }
-class JsonDatabase {
 
+class JsonDatabase {
+    +SerializeObject(Entity)
+    +DeserializeObject(Entity)
 }
 
 abstract class User{
-
+    Id
+    Username
+    Password
+    FirstName
+    LastName
 }
 
 class UserRepository{
@@ -48,7 +88,9 @@ class UserRepository{
 }
 
 class UserController{
-
+    +SignIn(username, password)
+    +SignOut()
+    +ResetPassword(username, currentPassword, newPassword)
 }
 
 class Employee{
