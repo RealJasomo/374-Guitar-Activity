@@ -1,0 +1,81 @@
+@startuml "Guitar Shop"
+
+class Main{
+    
+}
+
+class Guitar{
+
+}
+class GuitarSpecification{
+
+}
+
+interface Repository{
+
+}
+class GuitarRepository{
+
+}
+
+class GuitarController{
+
+}
+
+enum Builder{
+
+}
+enum Wood{
+
+}
+enum Type{
+
+}
+
+interface Database{
+
+}
+class JsonDatabase {
+
+}
+
+abstract class User{
+
+}
+
+class UserRepository{
+
+}
+
+class UserController{
+
+}
+
+class Employee{
+
+}
+class Customer{
+
+}
+
+Guitar --> GuitarSpecification
+GuitarRepository --|> Repository
+GuitarRepository --> Database
+
+GuitarController --> GuitarRepository
+GuitarRepository --> "*" Guitar
+GuitarSpecification --> Builder
+GuitarSpecification --> Wood
+GuitarSpecification --> Type
+JsonDatabase --|> Database
+
+Customer --|> User
+Employee --|> User
+UserRepository --|> Repository
+UserRepository --> Database
+UserController --> UserRepository
+UserRepository --> "*" User
+Main --> UserController
+Main --> GuitarController
+
+@enduml
