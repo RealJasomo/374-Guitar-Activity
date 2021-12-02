@@ -33,7 +33,7 @@ interface Repository{
     +Remove(Entity)
     +findById(Id)
     +findByKey(KeySelector, Key)
-    +SaveEntity(Entity)
+    +getAll()
 }
 
 class Piano{
