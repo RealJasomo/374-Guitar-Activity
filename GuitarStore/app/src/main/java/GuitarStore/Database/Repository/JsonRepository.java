@@ -9,7 +9,7 @@ import GuitarStore.Database.JsonDatabase;
 import GuitarStore.Database.Annotations.Entity;
 import GuitarStore.Database.Annotations.Key;
 
-public class JsonRepository<T, K extends Comparable<? super K>> {
+public class JsonRepository<T, K extends Comparable<? super K>> implements Repository<T, K> {
     private Database<T> db;
     private Class<T> EntityType;
 
